@@ -11,11 +11,11 @@ import {
   MdOutlineEmail,
 } from "react-icons/md";
 import { FaCartPlus, FaRegBell } from "react-icons/fa6";
-import SearchBox from "../searchBox/page";
+import SearchBox from "./searchBox";
 import Avatar from "@mui/material/Avatar";
 import { Typography, Box } from "@mui/material";
-import DropdownMenu from "../dropdown/page";
-import sdata from "../Sdata";
+import DropdownMenu from "./dropdown";
+import sdata from "./Sdata";
 
 const Header = ({ sidebarOpen, setSidebarOpen, darkMode, setDarkMode }) => {
   const [anchorEl, setAnchorEl] = useState(null);

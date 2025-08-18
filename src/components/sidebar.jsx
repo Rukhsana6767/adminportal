@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   MdDashboard,
   MdLockOutline,
@@ -21,35 +22,40 @@ const Sidebar = () => {
     setOpenDropdown(openDropdown === menu ? null : menu);
   };
 
+  // ✅ Removed Dashboard from dropdownMenus
   const dropdownMenus = [
-    {
-      label: "Dashboard",
-      icon: <MdDashboard />,
-      menu: "dashboard",
-      items: ["Dashboard 1", "Dashboard 2", "Dashboard 3"],
-    },
     {
       label: "Authentication",
       icon: <MdLockOutline />,
       menu: "auth",
-      items: ["Login", "Register", "Reset Password"],
+      items: [
+        { label: "Login", href: "/authentication/login" },
+        { label: "Register", href: "/authentication/register" },
+        { label: "Reset Password", href: "/authentication/reset" },
+      ],
     },
     {
       label: "Users",
       icon: <MdPeopleOutline />,
       menu: "users",
-      items: ["All Users", "Add User", "User Profile"],
+      items: [
+        { label: "All Users", href: "/users" },
+        { label: "Add User", href: "/users/add" },
+        { label: "User Profile", href: "/users/profile" },
+      ],
     },
   ];
 
+  // ✅ Added Dashboard as a static button
   const staticMenuItems = [
-    { label: "Product", icon: <MdShoppingCart /> },
-    { label: "Invoices", icon: <MdReceiptLong /> },
-    { label: "Orders", icon: <MdLocalShipping /> },
-    { label: "Messages", icon: <MdMessage /> },
-    { label: "Notifications", icon: <MdNotificationsNone /> },
-    { label: "Settings", icon: <MdSettings /> },
-    { label: "Blank Page", icon: <MdInsertDriveFile /> },
+    { label: "Dashboard", icon: <MdDashboard />, href: "/dashboard" },
+    { label: "Registration", icon: <MdShoppingCart />, href: "/authentication/registerForm" },
+    { label: "Invoices", icon: <MdReceiptLong />, href: "/invoices" },
+    { label: "Orders", icon: <MdLocalShipping />, href: "/orders" },
+    { label: "Messages", icon: <MdMessage />, href: "/messages" },
+    { label: "Notifications", icon: <MdNotificationsNone />, href: "/notifications" },
+    { label: "Settings", icon: <MdSettings />, href: "/settings" },
+    { label: "Blank Page", icon: <MdInsertDriveFile />, href: "/blank" },
   ];
 
   return (
@@ -74,11 +80,13 @@ const Sidebar = () => {
           {openDropdown === menu.menu && (
             <ul className="ml-10 mt-1 space-y-1 text-sm text-gray-600 font-medium">
               {menu.items.map((item, i) => (
-                <li
-                  key={i}
-                  className="hover:text-gray-900 cursor-pointer transition-all"
-                >
-                  {item}
+                <li key={i}>
+                  <Link
+                    href={item.href}
+                    className="block hover:text-gray-900 cursor-pointer transition-all"
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -88,13 +96,14 @@ const Sidebar = () => {
 
       {/* Static Buttons */}
       {staticMenuItems.map((item, idx) => (
-        <button
+        <Link
           key={idx}
+          href={item.href}
           className="w-full flex items-center gap-3 bg-white text-gray-800 hover:bg-gray-100 rounded-lg px-4 py-3 text-base font-semibold shadow-sm transition-all"
         >
           <span className="text-xl">{item.icon}</span>
           <span>{item.label}</span>
-        </button>
+        </Link>
       ))}
     </div>
   );

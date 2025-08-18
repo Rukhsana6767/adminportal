@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Header from "./components/header/page.js";
-import Dashboard from "./pages/dashboard/page.js";
-import Sidebar from "./components/sidebar/page.js";
+import Header from "../components/header.jsx";
+import Dashboard from "../components/dashboard.jsx";
+import Sidebar from "../components/sidebar.jsx";
 
 const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);

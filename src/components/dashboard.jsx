@@ -11,25 +11,30 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import Cards from "../cards/page";
+import Cards from "./cards";
 
 import { Chart } from "react-google-charts";
 
-const data = [
-  ["Task", "Hours per Day"],
-  ["Work", 9],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
+const dataOld = [
+  ["Name", "Popularity"],
+  ["Cesar", 250],
+  ["Rachel", 4200],
+  ["Patrick", 2900],
+  ["Eric", 8200],
 ];
 
-const options = {
-  backgroundColor: "transparent", // transparent background
-  legend: { textStyle: { color: "#fff" } }, // white legend text
-  titleTextStyle: { color: "#fff" }, // white title text
-  chartArea: { backgroundColor: "transparent" }, // also make chart area transparent
+const dataNew = [
+  ["Name", "Popularity"],
+  ["Cesar", 370],
+  ["Rachel", 600],
+  ["Patrick", 700],
+  ["Eric", 1500],
+];
+export const diffdata = {
+  old: dataOld,
+  new: dataNew,
 };
+
 const cardData = [
   {
     title: "Total Users",
@@ -79,7 +84,7 @@ const Dashboard = () => {
                 position: "relative",
                 overflow: "hidden",
                 paddingTop: "10px",
-                borderRadius:'8px',
+                borderRadius: "8px",
               }}
             >
               {/* Top-right icons */}
@@ -138,7 +143,7 @@ const Dashboard = () => {
               position: "relative",
               overflow: "hidden",
               paddingTop: "10px",
-              borderRadius:'8px'
+              borderRadius: "8px",
             }}
           >
             {/* Top-right icons */}
@@ -160,11 +165,16 @@ const Dashboard = () => {
               <Typography variant="h6">Total Sales</Typography>
               <Typography variant="body2">$3,155,245.55</Typography>
               <Chart
-                chartType="PieChart"
-                data={data}
-                options={options} // pass the updated options here
-                width={"400px"}
-                height={"500px"}
+                chartType="ColumnChart"
+                width="100%"
+                height="400px"
+                diffdata={diffdata}
+                options={{
+                  backgroundColor: "transparent", // ✅ Transparent background
+                  legend: { textStyle: { color: "white" } }, // optional: make legend text visible on dark bg
+                  hAxis: { textStyle: { color: "white" } }, // optional: white axis labels
+                  vAxis: { textStyle: { color: "white" } }, // optional: white axis labels
+                }}
               />
             </CardContent>
           </Card>
